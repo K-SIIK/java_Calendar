@@ -1,29 +1,54 @@
 public class calendar {
 
     private static final int[] MAX_DAYS = {31,28,31,30,31,30,31,31,30,31,30,31};
+    private static final int[] LEAP_MAX_DAYS = {31,29,31,30,31,30,31,31,30,31,30,31};
 
-    public int getMaxDaysOfMonth(int month) {
-        return MAX_DAYS[month - 1];
+    public boolean isLeapYear(int year) {
+        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public void SampleCalendar(int year, int month) {
-        System.out.printf("\t\t<<%3d년 %3d월>>\n",year,month);
-        System.out.println("\t일\t월\t화\t수\t목\t금\t토");
-        System.out.println("\t--------------------------");
-        int maxDay = getMaxDaysOfMonth(month);
+    public int getMaxDaysOfMonth(int year, int month) {
+        if (isLeapYear(year)) {
+            return LEAP_MAX_DAYS[month - 1];
+        }
+        else
+            return MAX_DAYS[month - 1];
 
-        for (int i=1; i<= maxDay; i++) {
-            System.out.printf("\t%d",i);
-            if (i % 7 == 0) {
+    }
+
+    public void SampleCalendar(int year, int month, int weekday) {
+        System.out.printf("\t\t<<%3d년 %3d월>>\n",year,month);
+        System.out.println("\tSU\tMO\tTU\tWE\tTH\tFR\tSA");
+        System.out.println("\t--------------------------");
+
+        int maxDay = getMaxDaysOfMonth(year, month);
+        int cnt = 7 - weekday;
+        if (weekday == 0) cnt = 0;
+
+
+        for (int j=0; j<weekday; j++) {
+            System.out.print("\t");
+        }
+
+        for (int k=1; k<=7-weekday; k++) {
+            System.out.printf("\t%d", k);
+        }
+        System.out.println();
+
+        for (int i = 8-weekday; i <= maxDay; i++) {
+            System.out.printf("\t%d", i);
+            if (i % 7 == cnt) {
                 System.out.println();
             }
         }
         System.out.println();
+        System.out.println();
 
-//        System.out.println("\t1\t2\t3\t4\t5\t6\t7");
-//        System.out.println("\t8\t9\t10\t11\t12\t13\t14");
-//        System.out.println("\t15\t16\t17\t18\t19\t20\t21");
-//        System.out.println("\t22\t23\t24\t25\t26\t27\t28");
     }
 
 }

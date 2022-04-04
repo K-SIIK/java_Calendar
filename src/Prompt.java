@@ -1,28 +1,27 @@
 import java.util.Scanner;
 
 public class Prompt {
-
-    public int parseDay(String week) {
-        switch(week) {
-            default : return 0;
-            case "mo" : return 1;
-            case "tu" : return 2;
-            case "we" : return 3;
-            case "th" : return 4;
-            case "fr" : return 5;
-            case "sa" : return 6;
-        }
-    }
+//    public int parseWeek(String week) {
+//        switch (week) {
+//            case "mo" : return 1;
+//            case "tu" : return 2;
+//            case "we" : return 3;
+//            case "th" : return 4;
+//            case "fr" : return 5;
+//            case "sa" : return 6;
+//            default : return 0;
+//        }
+//    }
 
     public void runPrompt() {
         Scanner scanner = new Scanner(System.in);
-        Calendar cal = new Calendar(); // Calendar 클래스의 다른 method 도 가져다 쓸 수 있도록 하기 위함..?
+        Calendar cal = new Calendar();
 
         while (true) {
             System.out.println("년을 입력하세요.");
             System.out.print("year> ");
             int year = scanner.nextInt();
-            if (year <= 0) {
+            if (year < 1) {
                 System.out.println("bye");
                 break;
             }
@@ -31,8 +30,8 @@ public class Prompt {
             System.out.print("month> ");
             int month = scanner.nextInt();
 
-            if (month <= 0 || month > 12) {
-                System.out.println("잘못 입력하셨습니다.(1 - 12)");
+            if (month < 1 || month > 12) {
+                System.out.println("다시 입력");
                 continue;
             }
 
